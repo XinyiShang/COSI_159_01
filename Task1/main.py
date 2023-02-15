@@ -8,6 +8,8 @@ from train import Trainer
 from evaluation import Evaluator
 from inference import Inferencer
 
+import matplotlib.pyplot as plt
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description='mnist classification')
@@ -43,14 +45,16 @@ def main():
     )
 
     # trainer
-    trainer = Trainer(model=model)
+    #trainer = Trainer(model=model)
     
     # model training
-    trainer.train(train_loader=train_loader, epochs=args.epochs, lr=args.lr, save_dir="./save/")
+    #trainer.train(train_loader=train_loader, epochs=args.epochs, lr=args.lr, save_dir="./save/")
     
+    #model loader 
+    model.load_state_dict(torch.load("save\mnist.pth"))
+
     # model evaluation
     #trainer.eval(test_loader=test_loader)
-
     #!!!!!
     #question: replace the evaluation??
     evaluator = Evaluator(model=model)
@@ -60,12 +64,16 @@ def main():
     # model inference
     #sample = None  # complete the sample here
     #trainer.infer(sample=sample)
-
     #!!!!!!!!!
     #is this the right way to do the inference??
     sample = torch.randn(1, 28, 28)
     class_index = Inferencer(model=model).infer(sample=sample)
     print("Inference result:", class_index)
+
+    #display the generated random sample image
+    img = sample.numpy()
+    plt.imshow(img[0], cmap='gray')
+    plt.show()
 
     return
 
