@@ -9,7 +9,7 @@ class Evaluator:
         self.model = model
         self.model.eval()
 
-    def evaluate(self, test_loader: DataLoader) -> Tuple[float, float]:
+    def evaluate(self, test_loader: DataLoader) -> float:
         # Model evaluation: return the model accuracy over test set 
         correct = 0
         total = 0
