@@ -12,6 +12,7 @@ class Inferencer:
     def infer(self, sample: Tensor) -> int:
         # Model inference: input an image, return its class index 
         with torch.no_grad():
-            output = self.model(sample.unsqueeze(0))
+            #output = self.model(sample.unsqueeze(0))
+            output = self.model(sample)
             pred = output.argmax(dim=1).item()
         return pred

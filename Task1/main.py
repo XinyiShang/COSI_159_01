@@ -66,13 +66,13 @@ def main():
     #trainer.infer(sample=sample)
     #!!!!!!!!!
     #is this the right way to do the inference??
-    sample = torch.randn(1, 28, 28)
+    sample = torch.randn(1, 1, 28, 28) #batch_size, channel, height, width
     class_index = Inferencer(model=model).infer(sample=sample)
     print("Inference result:", class_index)
 
     #display the generated random sample image
-    img = sample.numpy()
-    plt.imshow(img[0], cmap='gray')
+    img = sample.squeeze().numpy()
+    plt.imshow(img, cmap='gray')
     plt.show()
 
     return
